@@ -1,11 +1,14 @@
 # 使用镜像源
-FROM adoptopenjdk/openjdk11:x86_64-alpine-jdk-11.0.2.7-slim
+FROM adoptopenjdk/openjdk11:x86_64-alpine-jdk-11.0.4_11-slim
 
 # 镜像作者信息
-LABEL MAINTAINER midaug "blog.midaug.win"
+LABEL MAINTAINER "blog.midaug.win"
+
+# 更新安装源未国内
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 # 设定系统语言环境
-ENV LANG="C.UTF-8"
+ENV LANG='C.UTF-8' LANGUAGE='C.UTF-8' LC_ALL='C.UTF-8'
 
 # 安装语言包,不安装中文日志会出现?号无法正常显示
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
