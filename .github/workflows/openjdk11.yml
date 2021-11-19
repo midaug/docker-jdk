@@ -1,4 +1,4 @@
-name: openjdk11-jre
+name: openjdk11
 
 on:
   workflow_dispatch:
@@ -34,4 +34,11 @@ jobs:
           context: ./openJDK/11/jre/alpine_cn
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: midaug/openjdk11:latest,midaug/openjdk11:${{ github.event.inputs.tag }}
+          tags: midaug/openjdk11:jre-latest,midaug/openjdk11:jre-${{ github.event.inputs.tag }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./openJDK/11/jdk/alpine_cn
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: midaug/openjdk11:jdk-latest,midaug/openjdk11:latest,midaug/openjdk11:jdk-${{ github.event.inputs.tag }}          
